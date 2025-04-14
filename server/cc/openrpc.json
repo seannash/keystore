@@ -1,0 +1,87 @@
+{
+  "openrpc": "1.2.6",
+  "info": {
+    "title": "Ping API",
+    "version": "1.0.0",
+    "description": "A simple JSON-RPC 2.0 API that implements a Ping method"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:9001",
+      "description": "Local development server"
+    }
+  ],
+  "methods": [
+    {
+      "name": "Ping",
+      "summary": "Echoes back the provided message",
+      "description": "Takes a message parameter and returns it in the response",
+      "params": [
+        {
+          "name": "message",
+          "description": "The message to be echoed back",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "result": {
+        "name": "result",
+        "description": "The response containing the echoed message",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "message": {
+              "type": "string",
+              "description": "The echoed message"
+            }
+          }
+        }
+      },
+      "errors": [
+        {
+          "code": -32602,
+          "message": "Invalid params",
+          "data": {
+            "type": "string",
+            "description": "Error details"
+          }
+        },
+        {
+          "code": -32601,
+          "message": "Method not found"
+        },
+        {
+          "code": -32603,
+          "message": "Internal error",
+          "data": {
+            "type": "string",
+            "description": "Error details"
+          }
+        }
+      ]
+    }
+  ],
+  "components": {
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "Error code"
+          },
+          "message": {
+            "type": "string",
+            "description": "Error message"
+          },
+          "data": {
+            "type": "string",
+            "description": "Additional error information"
+          }
+        }
+      }
+    }
+  }
+} 

@@ -1,0 +1,136 @@
+openapi: 3.0.0
+info:
+  title: JSON-RPC 2.0 Ping API
+  version: 1.0.0
+  description: A simple JSON-RPC 2.0 API that implements a Ping method
+
+servers:
+  - url: http://localhost:9001
+    description: Local development server
+
+paths:
+  /:
+    post:
+      summary: JSON-RPC 2.0 endpoint
+      description: Handles JSON-RPC 2.0 requests, currently supports the Ping method
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JsonRpcRequest'
+      responses:
+        '200':
+          description: Successful JSON-RPC response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonRpcResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonRpcError'
+        '404':
+          description: Method not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonRpcError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonRpcError'
+
+components:
+  schemas:
+    JsonRpcRequest:
+      type: object
+      required:
+        - jsonrpc
+        - method
+        - params
+        - id
+      properties:
+        jsonrpc:
+          type: string
+          enum: ["2.0"]
+          description: JSON-RPC version
+        method:
+          type: string
+          enum: ["Ping"]
+          description: Method to call
+        params:
+          type: object
+          required:
+            - message
+          properties:
+            message:
+              type: string
+              description: Message to be echoed back
+        id:
+          oneOf:
+            - type: integer
+            - type: string
+            - type: null
+          description: Request identifier
+
+    JsonRpcResponse:
+      type: object
+      required:
+        - jsonrpc
+        - result
+        - id
+      properties:
+        jsonrpc:
+          type: string
+          enum: ["2.0"]
+          description: JSON-RPC version
+        result:
+          type: object
+          properties:
+            message:
+              type: string
+              description: Echoed message
+        id:
+          oneOf:
+            - type: integer
+            - type: string
+            - type: null
+          description: Request identifier
+
+    JsonRpcError:
+      type: object
+      required:
+        - jsonrpc
+        - error
+        - id
+      properties:
+        jsonrpc:
+          type: string
+          enum: ["2.0"]
+          description: JSON-RPC version
+        error:
+          type: object
+          required:
+            - code
+            - message
+          properties:
+            code:
+              type: integer
+              description: Error code
+            message:
+              type: string
+              description: Error message
+            data:
+              type: string
+              description: Additional error information
+        id:
+          oneOf:
+            - type: integer
+            - type: string
+            - type: null
+          description: Request identifier 
