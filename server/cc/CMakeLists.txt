@@ -31,12 +31,16 @@ set(ASIO_INCLUDE_DIR ${asio_SOURCE_DIR}/asio/include CACHE PATH "ASIO include di
 FetchContent_MakeAvailable(crow)
 
 # Add executable
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} 
+    src/main.cc
+    src/api/ping.cc
+)
 
 # Include Crow and ASIO headers
 target_include_directories(${PROJECT_NAME} PRIVATE 
     ${crow_SOURCE_DIR}/include
     ${ASIO_INCLUDE_DIR}
+    src
 )
 
 # No need to link with Crow as it's header-only 
