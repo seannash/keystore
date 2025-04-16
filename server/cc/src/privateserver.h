@@ -3,13 +3,13 @@
 #include "framework/jsonserver.h"
 #include "api/ping.h"   
 
-class Server : public framework::JsonServer {
+class PrivateServer : public framework::JsonServer {
 
 private:
     api::PingHandler ping_handler_;
 
 public:
-    Server();
-    ~Server() = default;
+    PrivateServer();
+    ~PrivateServer() = default;
 
 };

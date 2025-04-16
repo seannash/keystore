@@ -1,11 +1,13 @@
 #include <crow.h>
 #include "api/ping.h"
-#include "server.h"
+#include "publicserver.h"
+#include "privateserver.h"
 #include "framework/json_rpc_validation.h"
 
 int main() {
     crow::App<framework::JsonRpcValidationMiddleware> app;
-    Server server;
+    PublicServer public_server;
+    PrivateServer private_server;
 
     app.loglevel(crow::LogLevel::Debug);
 
@@ -15,7 +17,7 @@ int main() {
         .methods("POST"_method)
         ([&](crow::request& req, crow::response& res) {
             auto& ctx = app.get_context<framework::JsonRpcValidationMiddleware>(req);
-            server.handle_request(req, res, ctx);
+            public_server.handle_request(req, res, ctx);
         });
 
     // Define the private JSON-RPC endpoint
@@ -24,7 +26,7 @@ int main() {
         .methods("POST"_method)
         ([&](crow::request& req, crow::response& res) {
             auto& ctx = app.get_context<framework::JsonRpcValidationMiddleware>(req);
-            server.handle_request(req, res, ctx);
+            private_server.handle_request(req, res, ctx);
         });
 
     // Set the server to listen on port 9001
