@@ -18,6 +18,7 @@ add_executable(${PROJECT_NAME}
     src/framework/json_rpc_validation.cc
     src/framework/jsonserver.cc
     src/jsonutil.cc
+    src/server.cc
 )
 
 # Include headers

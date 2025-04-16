@@ -1,12 +1,12 @@
 #include <crow.h>
 #include "api/ping.h"
-#include "framework/jsonserver.h"
+#include "server.h"
 #include "framework/json_rpc_validation.h"
 #include "jsonutil.h"
 
 int main() {
     crow::App<framework::JsonRpcValidationMiddleware> app;
-    framework::JsonServer server;
+    Server server;
 
     app.loglevel(crow::LogLevel::Debug);
 

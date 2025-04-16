@@ -42,9 +42,9 @@ void json_handle_request_wrapper(T& handler, crow::request& req, crow::response&
 class JsonServer {
 private:
     using handler_t = std::function<void(crow::request&, crow::response&, const crow::json::rvalue&, const crow::json::rvalue&)>;
-    std::map<std::string, handler_t> handlers_;
 
-    api::PingHandler ping_handler_;
+protected:
+    std::map<std::string, handler_t> handlers_;
 
 public:
     JsonServer();
