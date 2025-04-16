@@ -34,6 +34,9 @@ FetchContent_MakeAvailable(crow)
 add_executable(${PROJECT_NAME} 
     src/main.cc
     src/api/ping.cc
+    src/server.cc
+    src/middleware/json_rpc_validation.cc
+    src/jsonutil.cc
 )
 
 # Include Crow and ASIO headers
