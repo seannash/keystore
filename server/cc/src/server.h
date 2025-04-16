@@ -4,12 +4,12 @@
 #include <string>
 #include <map>
 #include <memory>
-#include "api/handler.h"
 #include "middleware/json_rpc_validation.h"
 
 class Server {
 private:
-    std::map<std::string, std::unique_ptr<api::Handler>> handlers_;
+    using handler_t = std::function<void(crow::request&, crow::response&, const crow::json::rvalue&, const crow::json::rvalue&)>;
+    std::map<std::string, handler_t> handlers_;
 
 public:
     Server();
