@@ -2,6 +2,7 @@
 
 #include <crow.h>
 #include <string>
+#include <variant>
 
 namespace api {
 
@@ -11,9 +12,20 @@ public:
         std::string message;
     };
 
-    void handle(crow::request& req, crow::response& res, 
+    struct response_t {
+        std::string message;
+    };
+
+    struct error_response_t {
+        int code;
+        std::string message;
+    };
+
+    using combined_response_t =std::variant<response_t, error_response_t>;
+
+    int handle(crow::request& req, crow::response& res, 
                 const request_t& params, 
-                const crow::json::rvalue& id);
+                combined_response_t& response_out);
 };
 
 } // namespace api 

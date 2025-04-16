@@ -5,14 +5,23 @@
 
 namespace api {
 
-void PingHandler::handle(crow::request& req, crow::response& res, 
+int PingHandler::handle(crow::request& req, crow::response& res, 
                         const request_t& params, 
-                        const crow::json::rvalue& id) {
+                        combined_response_t& response_out) {
     if (!params.message.empty()) {
-        JsonUtil::send_success(res, params.message, id);
+        response_t response {
+            .message = params.message
+        };
+        response_out = response;
+        return 200;
     } else {
-        JsonUtil::send_error(res, -32602, "Invalid params", id);
+        error_response_t error {
+            .code = -32602
+        };
+        response_out = error;
+        return -32602;
     }
+
 }
 
 } // namespace api 

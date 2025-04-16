@@ -5,11 +5,14 @@
 #include <map>
 #include <memory>
 #include "middleware/json_rpc_validation.h"
+#include "api/ping.h"
 
 class Server {
 private:
     using handler_t = std::function<void(crow::request&, crow::response&, const crow::json::rvalue&, const crow::json::rvalue&)>;
     std::map<std::string, handler_t> handlers_;
+
+    api::PingHandler ping_handler_;
 
 public:
     Server();
