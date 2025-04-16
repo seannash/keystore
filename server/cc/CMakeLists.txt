@@ -15,8 +15,8 @@ find_package(Crow REQUIRED)
 add_executable(${PROJECT_NAME} 
     src/main.cc
     src/api/ping.cc
-    src/server.cc
-    src/middleware/json_rpc_validation.cc
+    src/framework/json_rpc_validation.cc
+    src/framework/jsonserver.cc
     src/jsonutil.cc
 )
 

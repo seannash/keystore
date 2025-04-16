@@ -1,6 +1,6 @@
 #include "json_rpc_validation.h"
 
-namespace middleware {
+namespace framework {
 
 void JsonRpcValidationMiddleware::before_handle(crow::request& req, crow::response& res, context& ctx) {
     try {
@@ -105,4 +105,4 @@ void JsonRpcValidationMiddleware::after_handle(crow::request& req, crow::respons
     // Nothing to do after handle
 }
 
-} // namespace middleware 
+} // namespace framework 

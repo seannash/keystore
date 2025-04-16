@@ -1,28 +1,30 @@
 #include <crow.h>
-#include <crow/middlewares/cors.h>
-#include "server.h"
+#include "api/ping.h"
+#include "framework/jsonserver.h"
+#include "framework/json_rpc_validation.h"
+#include "jsonutil.h"
 
 int main() {
-    crow::App<middleware::JsonRpcValidationMiddleware> app;
-    Server server;
+    crow::App<framework::JsonRpcValidationMiddleware> app;
+    framework::JsonServer server;
 
     app.loglevel(crow::LogLevel::Debug);
 
     // Define the public JSON-RPC endpoint
     CROW_ROUTE(app, "/public")
-        .CROW_MIDDLEWARES(app, middleware::JsonRpcValidationMiddleware)
+        .CROW_MIDDLEWARES(app, framework::JsonRpcValidationMiddleware)
         .methods("POST"_method)
         ([&](crow::request& req, crow::response& res) {
-            auto& ctx = app.get_context<middleware::JsonRpcValidationMiddleware>(req);
+            auto& ctx = app.get_context<framework::JsonRpcValidationMiddleware>(req);
             server.handle_request(req, res, ctx);
         });
 
     // Define the private JSON-RPC endpoint
     CROW_ROUTE(app, "/private")
-    .CROW_MIDDLEWARES(app, middleware::JsonRpcValidationMiddleware)
+    .CROW_MIDDLEWARES(app, framework::JsonRpcValidationMiddleware)
         .methods("POST"_method)
         ([&](crow::request& req, crow::response& res) {
-            auto& ctx = app.get_context<middleware::JsonRpcValidationMiddleware>(req);
+            auto& ctx = app.get_context<framework::JsonRpcValidationMiddleware>(req);
             server.handle_request(req, res, ctx);
         });
 

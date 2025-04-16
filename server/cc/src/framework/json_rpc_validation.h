@@ -3,7 +3,7 @@
 #include <crow.h>
 #include <string>
 
-namespace middleware {
+namespace framework {
 
 class JsonRpcValidationMiddleware : public crow::ILocalMiddleware {
 public:
@@ -18,4 +18,4 @@ public:
     void after_handle(crow::request& req, crow::response& res, context& ctx);
 };
 
-} // namespace middleware 
+} // namespace framework 
