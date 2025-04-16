@@ -21,7 +21,7 @@ void json_handle_request_wrapper(T& handler, crow::request& req, crow::response&
     std::string as = my_wvalue.dump();
     auto request_params = rfl::json::read<typename T::request_t>(as).value();        
     typename T::combined_response_t response_out;
-    auto code = handler.handle(req, res, request_params, response_out);
+    auto code = handler.handle(request_params, response_out);
     if (std::holds_alternative<typename T::response_t>(response_out)) {
         std::string json = rfl::json::write(std::get<typename T::response_t>(response_out));
         auto result = crow::json::load(json);

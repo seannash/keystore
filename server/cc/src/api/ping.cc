@@ -1,12 +1,9 @@
-#include <crow.h>
 #include <string>
 #include "ping.h"
-#include <jsonutil.h>
 
 namespace api {
 
-int PingHandler::handle(crow::request& req, crow::response& res, 
-                        const request_t& params, 
+int PingHandler::handle(const request_t& params, 
                         combined_response_t& response_out) {
     if (!params.message.empty()) {
         response_t response {

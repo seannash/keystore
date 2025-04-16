@@ -1,6 +1,5 @@
 #pragma once
 
-#include <crow.h>
 #include <string>
 #include <variant>
 
@@ -23,9 +22,8 @@ public:
 
     using combined_response_t =std::variant<response_t, error_response_t>;
 
-    int handle(crow::request& req, crow::response& res, 
-                const request_t& params, 
-                combined_response_t& response_out);
+    int handle(const request_t& params, 
+               combined_response_t& response_out);
 };
 
 } // namespace api 

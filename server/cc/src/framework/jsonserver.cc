@@ -1,13 +1,12 @@
 #include "jsonserver.h"
 
-#include "jsonutil.h"
 #include <rfl/json.hpp>
 #include <rfl.hpp>
 #include <crow.h>
 
 namespace framework {
 
-crow::response make_error(const crow::json::rvalue& id,int code, const crow::json::wvalue& error_response) {
+crow::response make_error(const crow::json::rvalue& id, int code, const crow::json::wvalue& error_response) {
     crow::json::wvalue body = {
         {"jsonrpc", "2.0"},
         {"error", error_response},
@@ -40,7 +39,7 @@ void JsonServer::handle_request(crow::request& req, crow::response& res, framewo
     if (it != handlers_.end()) {
         it->second(req, res, ctx.params, ctx.id);
     } else {
-        JsonUtil::send_error(res, -32601, "Method not found", ctx.id);
+        res = make_error(ctx.id, -32601, "Method not found");
     }
 }
 

@@ -2,7 +2,6 @@
 #include "api/ping.h"
 #include "server.h"
 #include "framework/json_rpc_validation.h"
-#include "jsonutil.h"
 
 int main() {
     crow::App<framework::JsonRpcValidationMiddleware> app;
