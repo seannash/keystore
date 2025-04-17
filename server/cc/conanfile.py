@@ -8,9 +8,10 @@ class CrowServerRecipe(ConanFile):
     generators = "CMakeDeps"
     
     def requirements(self):
+        self.requires("cpr/1.11.2")
         self.requires("reflect-cpp/0.18.0")
         self.requires("crowcpp-crow/1.2.0")
-        
+        self.requires("nlohmann_json/3.11.2")
     def generate(self):
         tc = CMakeToolchain(self)
         # Set the package configuration path
