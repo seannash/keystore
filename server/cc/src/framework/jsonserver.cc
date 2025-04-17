@@ -40,6 +40,7 @@ void JsonServer::handle_request(crow::request& req, crow::response& res, framewo
         it->second(req, res, ctx.params, ctx.id);
     } else {
         res = make_error(ctx.id, -32601, "Method not found");
+        res.end();
     }
 }
 
