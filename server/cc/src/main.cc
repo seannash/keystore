@@ -1,17 +1,17 @@
 
 #include "publicserver.h"
 #include "privateserver.h"
-#include "framework/genericapp.h"
-#include <context.h>
+#include "context.h"
+#include "framework/genericappwithcontext.h"
 #include <memory>
 
 int main() {
     auto context = Context::Builder()
         .withId(1)
         .build();
-    auto public_server = std::make_unique<PublicServer>(*context);
-    auto private_server = std::make_unique<PrivateServer>(*context);
-    framework::GenericApp<PublicServer, PrivateServer> app(crow::LogLevel::Debug, std::move(public_server), std::move(private_server));
+    framework::GenericAppWithContext<Context, PublicServer, PrivateServer> app(
+        crow::LogLevel::Debug,
+        std::move(context));
     app.run(9001);
     return 0;
 } 
