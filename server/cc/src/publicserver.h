@@ -1,8 +1,8 @@
 #pragma once
 
 #include "framework/jsonserver.h"
-#include "api/public/put.h"
-#include "api/public/get.h"
+#include "api/put.h"
+#include "api/get.h"
 #include <model/store.h>
 
 class PublicServer : public framework::JsonServer {
