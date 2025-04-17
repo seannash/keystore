@@ -2,42 +2,33 @@
 #include <iostream>
 #include <string>
 #include <nlohmann/json.hpp>
+#include "caller/put.h"
 
 int main(int argc, char** argv) {
-    // Default URL if none provided
-    std::string url = "http://localhost:8080/api";
-    std::string key {};
-    std::string value {};
-
     if (argc != 4) {
         std::cerr << "Usage: " << argv[0] << " <url> <key> <value>" << std::endl;
         return 1;
     }
 
-    url = argv[1];
-    key = argv[2];
-    value = argv[3];
+    std::string url = argv[1];
+    api::Put put(url);
+    api::Put::request_t request {
+        .key = argv[2],
+        .value = argv[3]
+    };
 
-    try {
-        nlohmann::json request = {
-            {"jsonrpc", "2.0"},
-            {"method", "put"},
-            {"params", {{"key", key}, {"value", value} }},
-            {"id", 1}
-        };
-        auto response = cpr::Post(
-            cpr::Url{url},
-            cpr::Header{{"Content-Type", "application/json"}},
-            cpr::Body{request.dump()}
-        );
-        if (response.status_code == 200) {
-            std::cout << "Response: " << response.text << std::endl;
-        } else {
-            std::cerr << "Error: " << response.status_code << " - " << response.text << std::endl;
-            return 1;
-        }
-    } catch (const std::exception& e) {
-        std::cerr << "Exception: " << e.what() << std::endl;
+    api::Put::combined_response_t response;
+    auto result = put.call(request, response);
+
+    if (result != 0) {
+        std::cerr << "Error: " << result << std::endl;
+        return 1;
+    }
+
+    if (std::holds_alternative<api::Put::response_t>(response)) {
+        std::cout << "Response: " << std::get<api::Put::response_t>(response) << std::endl;
+    } else {
+        std::cerr << "Error: " << std::get<api::Put::error_response_t>(response).code << " - " << std::get<api::Put::error_response_t>(response).message << std::endl;
         return 1;
     }
 

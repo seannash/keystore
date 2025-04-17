@@ -23,7 +23,7 @@ add_executable(${PROJECT_NAME}
     src/api/public/getkey.cc
     src/model/store.cc
     src/caller/get.cc
-
+    src/caller/put.cc
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE 
@@ -45,6 +45,12 @@ target_link_libraries(${PROJECT_NAME}
 
 add_executable(put
     src/clients/put.cc
+    src/caller/put.cc
+)
+
+target_include_directories(put
+    PRIVATE
+        src
 )
 
 target_link_libraries(put
