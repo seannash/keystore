@@ -19,8 +19,8 @@ add_executable(${PROJECT_NAME}
     src/framework/genericapp.cc
     src/publicserver.cc
     src/privateserver.cc
-    src/api/public/putkey.cc
-    src/api/public/getkey.cc
+    src/api/public/put.cc
+    src/api/public/get.cc
     src/model/store.cc
     src/caller/get.cc
     src/caller/put.cc
