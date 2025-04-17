@@ -1,7 +1,9 @@
 #pragma once
 
-#include <model/store.h>
+#include <keystore/model/store.h>
 #include <memory>
+
+namespace keystore {
 
 class Context {
 private:
@@ -29,3 +31,5 @@ public:
         std::unique_ptr<Context> build();
     };
 };
+
+} // namespace keystore

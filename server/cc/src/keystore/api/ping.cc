@@ -1,7 +1,7 @@
 #include <string>
 #include "ping.h"
 
-namespace api {
+namespace keystore::api {
 
 int PingHandler::handle(const request_t& params, 
                         combined_response_t& response_out) {
@@ -21,4 +21,4 @@ int PingHandler::handle(const request_t& params,
 
 }
 
-} // namespace api 
+} // namespace keystore::api 

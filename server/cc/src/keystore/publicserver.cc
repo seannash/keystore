@@ -1,4 +1,6 @@
-#include "publicserver.h"
+#include "keystore/publicserver.h"
+
+namespace keystore {
 
 PublicServer::PublicServer(Context& context)
 : framework::JsonServer()
@@ -7,3 +9,5 @@ PublicServer::PublicServer(Context& context)
     REGISTER_HANDLER("put", put_key_handler_);
     REGISTER_HANDLER("get", get_key_handler_);
 }
+
+} // namespace keystore

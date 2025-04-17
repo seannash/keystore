@@ -3,7 +3,8 @@
 #include <string>
 #include <unordered_map>
 #include <shared_mutex>
-namespace model {
+
+namespace keystore::model {
 
 class Store {
 public:
@@ -15,4 +16,4 @@ private:
     mutable std::shared_mutex mutex_;
 };
 
-} // namespace model
+} // namespace keystore::model

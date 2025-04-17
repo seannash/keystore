@@ -5,7 +5,7 @@
 #include <map>
 #include <memory>
 #include "framework/json_rpc_validation.h"
-#include "api/ping.h"
+#include "keystore/api/ping.h"
 #include <rfl/json.hpp>
 #include <rfl.hpp>
 

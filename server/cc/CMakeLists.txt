@@ -12,19 +12,19 @@ find_package(cpr REQUIRED)
 find_package(nlohmann_json REQUIRED)
 
 add_executable(${PROJECT_NAME} 
-    src/main.cc
-    src/api/ping.cc
+    src/keystore/main.cc
+    src/keystore/api/ping.cc
     src/framework/json_rpc_validation.cc
     src/framework/jsonserver.cc
     src/framework/genericapp.cc
-    src/publicserver.cc
-    src/privateserver.cc
-    src/api/put.cc
-    src/api/get.cc
-    src/model/store.cc
+    src/keystore/publicserver.cc
+    src/keystore/privateserver.cc
+    src/keystore/api/put.cc
+    src/keystore/api/get.cc
+    src/keystore/model/store.cc
     src/caller/get.cc
     src/caller/put.cc
-    src/context.cc
+    src/keystore/context.cc
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE 

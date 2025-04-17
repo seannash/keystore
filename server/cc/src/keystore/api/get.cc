@@ -1,7 +1,7 @@
 #include <string>
 #include "get.h"
 
-namespace api {
+namespace keystore::api {
 
 Get::Get(Context& context)
 : context_(context) {
@@ -29,4 +29,4 @@ int Get::handle(const request_t& params,
 
 }
 
-} // namespace api 
+} // namespace keystore::api 

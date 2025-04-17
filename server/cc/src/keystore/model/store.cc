@@ -2,7 +2,7 @@
 #include <mutex>
 #include <shared_mutex>
 
-namespace model {
+namespace keystore::model {
 
 void Store::put(const std::string& key, const std::string& value) {
     std::unique_lock lock(mutex_);
@@ -14,4 +14,4 @@ std::string Store::get(const std::string& key) {
     return store_[key];
 }
 
-} // namespace model
+} // namespace keystore::model

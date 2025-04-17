@@ -2,23 +2,22 @@
 
 #include <string>
 #include <variant>
-#include <context.h>
+#include <keystore/context.h>
 
-namespace api {
+namespace keystore::api {
 
-class Get {
+class Put {
 protected:
     Context& context_;
 public:
-    Get(Context& context);
+    Put(Context& context);
 
     struct request_t {
         std::string key;
+        std::string value;
     };
 
     struct response_t {
-        int server;
-        std::string value;
         std::string status;
     };
 

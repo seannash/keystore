@@ -1,7 +1,7 @@
 #include <string>
 #include "put.h"
 
-namespace api {
+namespace keystore::api {
 
 Put::Put(Context& context)
 : context_(context) {
@@ -27,4 +27,4 @@ int Put::handle(const request_t& params,
 
 }
 
-} // namespace api 
+} // namespace keystore::api 

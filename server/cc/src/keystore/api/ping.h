@@ -3,7 +3,7 @@
 #include <string>
 #include <variant>
 
-namespace api {
+namespace keystore::api {
 
 class PingHandler {
 public:
@@ -26,4 +26,4 @@ public:
                combined_response_t& response_out);
 };
 
-} // namespace api 
+} // namespace keystore::api 

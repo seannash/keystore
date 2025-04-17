@@ -1,9 +1,11 @@
 #pragma once
 
 #include "framework/jsonserver.h"
-#include "api/put.h"
-#include "api/get.h"
-#include <context.h>
+#include "keystore/api/put.h"
+#include "keystore/api/get.h"
+#include <keystore/context.h>
+
+namespace keystore {    
 
 class PublicServer : public framework::JsonServer {
 
@@ -16,3 +18,5 @@ public:
     ~PublicServer() = default;
 
 };
+
+} // namespace keystore

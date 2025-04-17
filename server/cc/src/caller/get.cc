@@ -5,6 +5,7 @@
 #include <cpr/cpr.h>
 #include <iostream>
 #include <variant>
+
 namespace api {
 
 Get::Get(std::string_view endpoint_)

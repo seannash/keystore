@@ -1,8 +1,10 @@
 #pragma once
 
 #include "framework/jsonserver.h"
-#include "api/ping.h"   
-#include <context.h>
+#include "keystore/api/ping.h"   
+#include <keystore/context.h>
+
+namespace keystore {
 
 class PrivateServer : public framework::JsonServer {
 
@@ -14,3 +16,5 @@ public:
     ~PrivateServer() = default;
 
 };
+
+} // namespace keystore
