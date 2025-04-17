@@ -2,49 +2,34 @@
 #include <iostream>
 #include <string>
 #include <nlohmann/json.hpp>
+#include "caller/get.h"
 
 int main(int argc, char** argv) {
-    // Default URL if none provided
-    std::string url = "http://localhost:8080/api";
-    std::string key {};
 
-    if (argc != 3) {
+   if (argc != 3) {
         std::cerr << "Usage: " << argv[0] << " <url> <key>" << std::endl;
         return 1;
     }
 
-    url = argv[1];
-    key = argv[2];
+    std::string url = argv[1];
+    api::Get get(url);
+    api::Get::request_t request {.key = argv[2]};
 
-    try {
-        // Create JSON-RPC request for Ping
-        nlohmann::json request = {
-            {"jsonrpc", "2.0"},
-            {"method", "get"},
-            {"params", {{"key", key} }},
-            {"id", 1}
-        };
-        
-        // Make POST request with JSON body
-        auto response = cpr::Post(
-            cpr::Url{url},
-            cpr::Header{{"Content-Type", "application/json"}},
-            cpr::Body{request.dump()}
-        );
+    api::Get::combined_response_t response;
+    auto result = get.call(request, response);
 
-        std::cout << "B\n";
-
-        // Check if request was successful
-        if (response.status_code == 200) {
-            std::cout << "Response: " << response.text << std::endl;
-        } else {
-            std::cerr << "Error: " << response.status_code << " - " << response.text << std::endl;
-            return 1;
-        }
-    } catch (const std::exception& e) {
-        std::cerr << "Exception: " << e.what() << std::endl;
+    if (result != 0) {
+        std::cerr << "Error: " << result << std::endl;
         return 1;
     }
+
+    if (std::holds_alternative<api::Get::response_t>(response)) {
+        std::cout << "Response: " << std::get<api::Get::response_t>(response) << std::endl;
+    } else {
+        std::cerr << "Error: " << std::get<api::Get::error_response_t>(response).code << " - " << std::get<api::Get::error_response_t>(response).message << std::endl;
+        return 1;
+    }
+    
 
     return 0;
 }

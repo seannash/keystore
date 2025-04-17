@@ -22,6 +22,8 @@ add_executable(${PROJECT_NAME}
     src/api/public/putkey.cc
     src/api/public/getkey.cc
     src/model/store.cc
+    src/caller/get.cc
+
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE 
@@ -30,12 +32,13 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     src
 )
 
-
 target_link_libraries(${PROJECT_NAME} 
     PUBLIC 
         reflectcpp::reflectcpp
         Crow::Crow
     PRIVATE
+        cpr::cpr
+        nlohmann_json::nlohmann_json
         stdc++fs
         pthread
 )
@@ -52,6 +55,12 @@ target_link_libraries(put
 
 add_executable(get
     src/clients/get.cc
+    src/caller/get.cc
+)
+
+target_include_directories(get
+    PRIVATE
+        src
 )
 
 target_link_libraries(get
