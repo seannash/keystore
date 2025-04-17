@@ -17,6 +17,7 @@ add_executable(${PROJECT_NAME}
     src/api/ping.cc
     src/framework/json_rpc_validation.cc
     src/framework/jsonserver.cc
+    src/framework/genericapp.cc
     src/publicserver.cc
     src/privateserver.cc
 )
