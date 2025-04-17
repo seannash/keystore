@@ -7,8 +7,9 @@
 
 int main() {
     auto context = Context::Builder()
-        .withId(1)
+        .withId(9001)
         .build();
+    std::cout << "Context ID: " << context->id() << std::endl;
     framework::GenericAppWithContext<Context, PublicServer, PrivateServer> app(
         crow::LogLevel::Debug,
         std::move(context));

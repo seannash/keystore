@@ -9,6 +9,11 @@ model::Store& Context::store() {
     return store_;
 }
 
+int Context::id() const {
+    return id_;
+}
+
+
 // Builder implementation
 Context::Builder::Builder()
 : id_(0) {

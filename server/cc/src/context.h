@@ -14,6 +14,7 @@ private:
 public:
     Context(int id);
     ~Context() = default;
+    int id() const;
     model::Store& store();
     
     // Builder class

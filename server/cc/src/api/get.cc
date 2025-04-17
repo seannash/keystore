@@ -12,6 +12,7 @@ int Get::handle(const request_t& params,
     if (!params.key.empty()) {
         auto value = context_.store().get(params.key);
         response_t response {
+            .server = context_.id(),
             .value = value,
             .status = "success"
         };

@@ -61,7 +61,7 @@ std::ostream& operator<<(std::ostream& os, const Get::request_t& request) {
 }
 
 std::ostream& operator<<(std::ostream& os, const Get::response_t& response) {
-    os << "[ value: " << response.value << " ]";
+    os << "[ value: " << response.value << ", server: " << response.server << " ]";
     return os;
 }
 

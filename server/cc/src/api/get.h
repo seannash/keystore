@@ -17,6 +17,7 @@ public:
     };
 
     struct response_t {
+        int server;
         std::string value;
         std::string status;
     };
