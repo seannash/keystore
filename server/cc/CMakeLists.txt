@@ -24,6 +24,7 @@ add_executable(${PROJECT_NAME}
     src/model/store.cc
     src/caller/get.cc
     src/caller/put.cc
+    src/context.cc
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE 

@@ -3,14 +3,14 @@
 
 namespace api {
 
-Get::Get(model::Store& store)
-: store_(store) {
+Get::Get(Context& context)
+: context_(context) {
 }
 
 int Get::handle(const request_t& params, 
                         combined_response_t& response_out) {
     if (!params.key.empty()) {
-        auto value = store_.get(params.key);
+        auto value = context_.store().get(params.key);
         response_t response {
             .value = value,
             .status = "success"

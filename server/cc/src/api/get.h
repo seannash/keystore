@@ -2,15 +2,15 @@
 
 #include <string>
 #include <variant>
-#include <model/store.h>
+#include <context.h>
 
 namespace api {
 
 class Get {
 protected:
-    model::Store& store_;
+    Context& context_;
 public:
-    Get(model::Store& store);
+    Get(Context& context);
 
     struct request_t {
         std::string key;

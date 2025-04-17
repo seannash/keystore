@@ -2,14 +2,15 @@
 
 #include "framework/jsonserver.h"
 #include "api/ping.h"   
-#include <model/store.h>
+#include <context.h>
+
 class PrivateServer : public framework::JsonServer {
 
 private:
     api::PingHandler ping_handler_;
 
 public:
-    PrivateServer(model::Store& store);
+    PrivateServer(Context& context);
     ~PrivateServer() = default;
 
 };

@@ -2,15 +2,15 @@
 
 #include <string>
 #include <variant>
-#include <model/store.h>
+#include <context.h>
 
 namespace api {
 
 class Put {
 protected:
-    model::Store& store_;
+    Context& context_;
 public:
-    Put(model::Store& store);
+    Put(Context& context);
 
     struct request_t {
         std::string key;

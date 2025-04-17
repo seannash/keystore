@@ -3,7 +3,7 @@
 #include "framework/jsonserver.h"
 #include "api/put.h"
 #include "api/get.h"
-#include <model/store.h>
+#include <context.h>
 
 class PublicServer : public framework::JsonServer {
 
@@ -12,7 +12,7 @@ private:
     api::Get get_key_handler_;
 
 public:
-    PublicServer(model::Store& store);
+    PublicServer(Context& context);
     ~PublicServer() = default;
 
 };

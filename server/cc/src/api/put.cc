@@ -3,14 +3,14 @@
 
 namespace api {
 
-Put::Put(model::Store& store)
-: store_(store) {
+Put::Put(Context& context)
+: context_(context) {
 }
 
 int Put::handle(const request_t& params, 
                         combined_response_t& response_out) {
     if (!params.key.empty() && !params.value.empty()) {
-        store_.put(params.key, params.value);
+        context_.store().put(params.key, params.value);
         response_t response {
             .status = "success"
         };
