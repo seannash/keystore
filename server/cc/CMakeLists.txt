@@ -20,6 +20,8 @@ add_executable(${PROJECT_NAME}
     src/framework/genericapp.cc
     src/publicserver.cc
     src/privateserver.cc
+    src/api/public/putkey.cc
+    src/api/public/getkey.cc
 )
 
 # Include headers
