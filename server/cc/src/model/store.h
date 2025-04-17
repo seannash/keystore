@@ -2,7 +2,7 @@
 
 #include <string>
 #include <unordered_map>
-
+#include <shared_mutex>
 namespace model {
 
 class Store {
@@ -12,6 +12,7 @@ public:
 
 private:
     std::unordered_map<std::string, std::string> store_;
+    mutable std::shared_mutex mutex_;
 };
 
 } // namespace model
