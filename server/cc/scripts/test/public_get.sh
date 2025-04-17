@@ -6,7 +6,7 @@ curl -X POST http://localhost:9001/public \
     "jsonrpc": "2.0",
     "method": "get",
     "params": {
-      "key": "test"
+      "key": "'${1}'"
     },
     "id": 1
   }'

@@ -22,6 +22,7 @@ add_executable(${PROJECT_NAME}
     src/privateserver.cc
     src/api/public/putkey.cc
     src/api/public/getkey.cc
+    src/model/store.cc
 )
 
 # Include headers

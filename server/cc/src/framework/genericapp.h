@@ -9,10 +9,13 @@ template<typename PublicServer, typename PrivateServer>
 class GenericApp {
 private:
     crow::App<framework::JsonRpcValidationMiddleware> app;
-    PublicServer public_server;
-    PrivateServer private_server;
+    std::unique_ptr<PublicServer> public_server_;
+    std::unique_ptr<PrivateServer> private_server_;
 public:
-    GenericApp(crow::LogLevel loglevel);
+    GenericApp(
+        crow::LogLevel loglevel,
+        std::unique_ptr<PublicServer> public_server,
+        std::unique_ptr<PrivateServer> private_server);
     void run(int port);
 };
 
@@ -22,7 +25,13 @@ void GenericApp<PublicServer, PrivateServer>::run(int port) {
 }
 
 template<typename PublicServer, typename PrivateServer>
-GenericApp<PublicServer, PrivateServer>::GenericApp(crow::LogLevel loglevel) {
+GenericApp<PublicServer, PrivateServer>::GenericApp(
+    crow::LogLevel loglevel,
+    std::unique_ptr<PublicServer> public_server,
+    std::unique_ptr<PrivateServer> private_server)
+: app()
+, public_server_(std::move(public_server))
+, private_server_(std::move(private_server)) {
     app.loglevel(loglevel);
         // Define the public JSON-RPC endpoint
     CROW_ROUTE(app, "/public")
@@ -30,7 +39,7 @@ GenericApp<PublicServer, PrivateServer>::GenericApp(crow::LogLevel loglevel) {
         .methods("POST"_method)
         ([&](crow::request& req, crow::response& res) {
             auto& ctx = app.get_context<framework::JsonRpcValidationMiddleware>(req);
-            public_server.handle_request(req, res, ctx);
+            public_server_->handle_request(req, res, ctx);
         });
 
     // Define the private JSON-RPC endpoint
@@ -39,7 +48,7 @@ GenericApp<PublicServer, PrivateServer>::GenericApp(crow::LogLevel loglevel) {
         .methods("POST"_method)
         ([&](crow::request& req, crow::response& res) {
             auto& ctx = app.get_context<framework::JsonRpcValidationMiddleware>(req);
-            private_server.handle_request(req, res, ctx);
+            private_server_->handle_request(req, res, ctx);
         });
 }
 

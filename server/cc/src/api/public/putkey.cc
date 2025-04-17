@@ -3,9 +3,14 @@
 
 namespace api {
 
+PutKey::PutKey(model::Store& store)
+: store_(store) {
+}
+
 int PutKey::handle(const request_t& params, 
                         combined_response_t& response_out) {
     if (!params.key.empty() && !params.value.empty()) {
+        store_.put(params.key, params.value);
         response_t response {
             .status = "success"
         };

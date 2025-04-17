@@ -2,11 +2,16 @@
 
 #include <string>
 #include <variant>
+#include <model/store.h>
 
 namespace api {
 
 class GetKey {
+protected:
+    model::Store& store_;
 public:
+    GetKey(model::Store& store);
+
     struct request_t {
         std::string key;
     };
