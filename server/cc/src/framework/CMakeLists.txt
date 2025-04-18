@@ -1,3 +1,8 @@
+# Find required packages
+find_package(reflectcpp REQUIRED)
+find_package(Crow REQUIRED)
+
+# Add framework library
 add_library(framework
     json_rpc_validation.cc
     json_rpc_validation.h
@@ -9,11 +14,13 @@ add_library(framework
     genericappwithcontext.h
 )
 
+# Set include directories
 target_include_directories(framework PUBLIC 
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_SOURCE_DIR}/src
 )
 
+# Link libraries
 target_link_libraries(framework PUBLIC 
     reflectcpp::reflectcpp
     Crow::Crow

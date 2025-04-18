@@ -1,3 +1,7 @@
+# Find required packages
+find_package(cpr REQUIRED)
+find_package(nlohmann_json REQUIRED)
+
 # Add caller library
 add_library(caller
     get.cc
